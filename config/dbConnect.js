@@ -1,12 +1,14 @@
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const dbConnect = () => {
 	if (mongoose.connection.readyState >= 1) {
 		return;
 	}
 
+	console.log(process.env.DB_URI);
 	mongoose.connect(
-		process.env.DB_URI,
+		'mongodb://localhost:27017/bookit',
 		{
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
@@ -18,4 +20,5 @@ const dbConnect = () => {
 	);
 };
 
-export default dbConnect;
+// export default dbConnect;
+module.exports = dbConnect;

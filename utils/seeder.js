@@ -1,18 +1,24 @@
 const Room = require('../models/room');
+// import Room from '../models/room';
 const mongoose = require('mongoose');
 
-const rooms = require('../data/rooms');
+const dbConnect = require('../config/dbConnect');
 
-mongoose.connect(
-	// 'mongodb+srv://ghulamabbas_bookit:bookit258@bookit.ghtfw.mongodb.net/bookit?retryWrites=true&w=majority',
-	'mongodb://localhost:27017/bookit',
-	{
-		useNewUrlParser: true,
-		useUnifiedTopology: true,
-		// useFindAndModify: false,
-		// useCreateIndex: true,
-	}
-);
+const rooms = require('../data/rooms');
+// import rooms from '../data/rooms.json';
+
+dbConnect();
+
+// mongoose.connect(
+// 	// 'mongodb+srv://ghulamabbas_bookit:bookit258@bookit.ghtfw.mongodb.net/bookit?retryWrites=true&w=majority',
+// 	'mongodb://localhost:27017/bookit',
+// 	{
+// 		useNewUrlParser: true,
+// 		useUnifiedTopology: true,
+// 		// useFindAndModify: false,
+// 		// useCreateIndex: true,
+// 	}
+// );
 
 const seedRooms = async () => {
 	try {

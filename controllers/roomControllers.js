@@ -1,7 +1,7 @@
 import Room from '../models/room';
 import Booking from '../models/booking';
 
-// import cloudinary from 'cloudinary';
+import cloudinary from 'cloudinary';
 
 import ErrorHandler from '../utils/errorHandler';
 import catchAsyncErrors from '../middlewares/catchAsyncErrors';
@@ -16,7 +16,8 @@ const allRooms = catchAsyncErrors(async (req, res) => {
 
 	const apiFeatures = new APIFeatures(Room.find(), req.query).search().filter();
 
-	let rooms = await apiFeatures.query;
+	// let rooms = await apiFeatures.query;
+	let rooms = await apiFeatures.query.clone();
 	let filteredRoomsCount = rooms.length;
 
 	apiFeatures.pagination(resPerPage);
