@@ -97,11 +97,13 @@ export const getRoomDetails = (req, id) => async (dispatch) => {
 			type: ROOM_DETAILS_SUCCESS,
 			payload: data.room,
 		});
+		// res.end(JSON.stringify(response));
 	} catch (error) {
 		dispatch({
 			type: ROOM_DETAILS_FAIL,
 			payload: error.response.data.message,
 		});
+		res.status(405).end();
 	}
 };
 

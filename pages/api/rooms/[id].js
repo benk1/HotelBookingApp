@@ -1,20 +1,23 @@
-import RoomDetails from '../../components/room/RoomDetails';
-import Layout from '../../components/layout/Layout';
+import nc from 'next-connect';
+import dbConnect from '../../../config/dbConnect';
 
-import { getRoomDetails } from '../../redux/actions/roomActions';
+import {
+	getSingleRoom,
+	updateRoom,
+	deleteRoom,
+} from '../../../controllers/roomControllers';
 
-import { wrapper } from '../../redux/store';
+import onError from '../../../middlewares/errors';
+import { isAuthenticatedUser, authorizeRoles } from '../../../middlewares/auth';
 
-export default function RoomDetailsPage() {
-	return (
-		<Layout>
-			<RoomDetails title="Room Details" />
-		</Layout>
-	);
-}
+const handler = nc({ onError });
 
-export const getServerSideProps = wrapper.getServerSideProps(
-	async ({ req, params, store }) => {
-		await store.dispatch(getRoomDetails(req, params.id));
-	}
-);
+dbConnect();
+
+handler.get(getSingleRoom);
+
+handler.use(isAuthenticatedUser, authorizeRoles('admin')).put(updateRoom);
+
+handler.use(isAuthenticatedUser, authorizeRoles('admin')).delete(deleteRoom);
+
+export default handler;
