@@ -8,8 +8,8 @@ const Header = () => {
 				<div className="col-3 p-0">
 					<div className="navbar-brand">
 						<Link href="/">
-							<Image
-								layout="fill"
+							<img
+								// layout="fill"
 								// width={100}
 								// height={100}
 								style={{ cursor: 'pointer' }}

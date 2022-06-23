@@ -1,9 +1,5 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-
 import Layout from '../../components/layout/Layout';
 import RoomDetails from '../../components/room/RoomDetails';
-// import RoomDetails from '../../components/room/RoomDetails';
 
 import { getRoomDetails } from '../../redux/actions/roomActions';
 import { wrapper } from '../../redux/store';
