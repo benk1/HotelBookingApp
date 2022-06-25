@@ -24,7 +24,21 @@ const Home = () => {
 		}
 	}, []);
 
+	let queryParams;
+	if (typeof window !== 'undefined') {
+		queryParams = new URLSearchParams(window.location.search);
+	}
+
 	const handlePagination = (pageNumber) => {
+		if (queryParams.has('page')) {
+			queryParams.set('page', pageNumber);
+		} else {
+			queryParams.append('page', pageNumber);
+		}
+
+		router.replace({
+			search: queryParams.toString(),
+		});
 		if (location) {
 			let url = window.location.search;
 
@@ -60,7 +74,7 @@ const Home = () => {
 				<div className="row">
 					{rooms && rooms.length === 0 ? (
 						<div className="alert alert-danger mt-5 w-100">
-							<b>No Rooms.</b>
+							<b>No Rooms Found.</b>
 						</div>
 					) : (
 						rooms &&
